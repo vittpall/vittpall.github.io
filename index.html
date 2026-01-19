@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vittorio Palladino | ML Engineer & Researcher</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <title>Vittorio Palladino</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,381 +13,251 @@
         }
 
         :root {
-            --primary: #C41230;
-            --dark: #0f0f0f;
-            --light: #f8f9fa;
-            --gray: #6c757d;
-            --accent: #2563eb;
+            --primary: #1a1a1a;
+            --accent: #C41230;
+            --text-primary: #2a2a2a;
+            --text-secondary: #666;
+            --bg: #ffffff;
+            --border: #e0e0e0;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--dark);
-            color: var(--light);
-            line-height: 1.6;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.7;
             overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Navigation */
-        nav {
+        /* Sidebar Navigation */
+        .sidebar {
             position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(15, 15, 15, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-        }
-
-        nav .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        nav ul {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        nav a {
-            color: var(--light);
-            text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 500;
-        }
-
-        nav a:hover {
-            color: var(--primary);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            background: linear-gradient(135deg, var(--dark) 0%, #1a1a1a 100%);
-        }
-
-        .hero-content {
-            text-align: center;
-            z-index: 10;
-        }
-
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--light), var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .hero .subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: var(--gray);
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.8s ease-out 0.2s backwards;
-        }
-
-        .hero .cta {
-            display: inline-flex;
-            gap: 1rem;
-            animation: fadeInUp 0.8s ease-out 0.4s backwards;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(196, 18, 48, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--light);
-            border: 2px solid var(--light);
-        }
-
-        .btn-secondary:hover {
-            background: var(--light);
-            color: var(--dark);
-        }
-
-        /* Section Styles */
-        section {
-            padding: 6rem 0;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            text-align: center;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: var(--primary);
-            margin: 1rem auto;
-        }
-
-        /* About Section */
-        #about {
-            background: #1a1a1a;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text p {
-            margin-bottom: 1rem;
-            color: #c0c0c0;
-            font-size: 1.1rem;
-        }
-
-        .skills-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .skill-tag {
-            background: rgba(196, 18, 48, 0.1);
-            border: 1px solid var(--primary);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-family: 'JetBrains Mono', monospace;
-            color: var(--light);
-        }
-
-        /* Education Section */
-        .education-grid {
-            display: grid;
-            gap: 2rem;
-        }
-
-        .education-card {
-            background: #1a1a1a;
-            padding: 2rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--primary);
-            transition: transform 0.3s;
-        }
-
-        .education-card:hover {
-            transform: translateX(10px);
-        }
-
-        .education-card h3 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            font-size: 1.5rem;
-        }
-
-        .education-card .degree {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .education-card .date {
-            color: var(--gray);
-            margin-bottom: 1rem;
-        }
-
-        .education-card .courses {
-            color: #c0c0c0;
-            font-style: italic;
-        }
-
-        /* Experience Section */
-        #experience {
-            background: #1a1a1a;
-        }
-
-        .experience-item {
-            background: var(--dark);
-            padding: 2.5rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
-        }
-
-        .experience-item:hover {
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(196, 18, 48, 0.2);
-        }
-
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .experience-header h3 {
-            color: var(--primary);
-            font-size: 1.5rem;
-        }
-
-        .experience-header .date {
-            color: var(--gray);
-        }
-
-        .experience-item ul {
-            list-style: none;
-            margin-top: 1rem;
-        }
-
-        .experience-item li {
-            padding-left: 1.5rem;
-            margin-bottom: 0.8rem;
-            position: relative;
-            color: #c0c0c0;
-        }
-
-        .experience-item li::before {
-            content: '▹';
-            position: absolute;
             left: 0;
-            color: var(--primary);
-            font-weight: bold;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            padding: 3rem 2rem;
+            border-right: 1px solid var(--border);
+            background: var(--bg);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: #1a1a1a;
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 15px 40px rgba(196, 18, 48, 0.2);
-        }
-
-        .project-card h3 {
-            color: var(--light);
+        .sidebar-header h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
             margin-bottom: 0.5rem;
-            font-size: 1.3rem;
+            color: var(--primary);
         }
 
-        .project-card .location {
-            color: var(--gray);
-            font-size: 0.9rem;
+        .sidebar-header .title {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            line-height: 1.5;
+            margin-bottom: 2rem;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav li {
             margin-bottom: 1rem;
         }
 
-        /* Achievements Section */
-        #achievements {
-            background: #1a1a1a;
+        .sidebar nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.85rem;
         }
 
-        .achievements-grid {
-            display: grid;
-            gap: 1.5rem;
+        .sidebar nav a:hover {
+            color: var(--accent);
         }
 
-        .achievement-card {
-            background: var(--dark);
-            padding: 2rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--primary);
-        }
-
-        .achievement-card h3 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Contact Section */
-        #contact {
-            text-align: center;
+        .sidebar-footer {
+            margin-top: auto;
         }
 
         .contact-links {
             display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
         }
 
         .contact-links a {
-            color: var(--light);
+            color: var(--text-secondary);
             text-decoration: none;
-            font-size: 1.2rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             transition: color 0.3s;
         }
 
         .contact-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 4rem 6rem;
+            max-width: 900px;
+        }
+
+        section {
+            margin-bottom: 5rem;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+
+        h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
             color: var(--primary);
         }
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: #0a0a0a;
-            color: var(--gray);
+        h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .intro-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        /* Education & Experience */
+        .timeline-item {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.8rem;
+        }
+
+        .institution {
+            font-weight: 500;
+            color: var(--primary);
+            font-size: 1.05rem;
+        }
+
+        .date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        .position {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        ul li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.7rem;
+            position: relative;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        ul li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill-tag {
+            padding: 0.4rem 0.9rem;
+            background: transparent;
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            transition: all 0.3s;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Projects Grid */
+        .projects-section .timeline-item {
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Achievements */
+        .achievement {
+            margin-bottom: 1.5rem;
+        }
+
+        .achievement h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .achievement p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
         }
 
         /* Animations */
-        @keyframes fadeInUp {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -396,230 +266,238 @@
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            nav ul {
-                gap: 1rem;
-                font-size: 0.9rem;
+        @media (max-width: 968px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                padding: 2rem;
             }
 
-            .about-content {
-                grid-template-columns: 1fr;
+            .sidebar nav {
+                display: flex;
             }
 
-            .experience-header {
-                flex-direction: column;
+            .sidebar nav ul {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1.5rem;
             }
 
-            .projects-grid {
-                grid-template-columns: 1fr;
+            .sidebar nav li {
+                margin-bottom: 0;
             }
 
             .contact-links {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 3rem 2rem;
+            }
+
+            .timeline-header {
                 flex-direction: column;
-                gap: 1rem;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .main-content {
+                padding: 2rem 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            .intro-text {
+                font-size: 1.05rem;
             }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <div class="logo">VP</div>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div>
+            <div class="sidebar-header">
+                <h1>Vittorio Palladino</h1>
+                <p class="title">Research Fellow<br>ML Engineer & Computer Vision Researcher</p>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#research">Research</a></li>
+                    <li><a href="#achievements">Achievements</a></li>
+                </ul>
+            </nav>
         </div>
-    </nav>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Vittorio Palladino</h1>
-            <p class="subtitle">ML Engineer × Computer Vision Researcher</p>
-            <div class="cta">
-                <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                <a href="#projects" class="btn btn-secondary">View Work</a>
+        <div class="sidebar-footer">
+            <div class="contact-links">
+                <a href="mailto:vpall3@uic.edu">Email</a>
+                <a href="https://github.com/vittpall" target="_blank">GitHub</a>
+                <a href="https://linkedin.com/in/vittorio-palladino-41205a339/" target="_blank">LinkedIn</a>
+                <a href="#" target="_blank">Curriculum Vitae</a>
             </div>
         </div>
-    </section>
+    </aside>
 
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>I'm a dual Master's student at <strong>University of Illinois Chicago</strong> and <strong>Politecnico di Milano</strong>, specializing in machine learning, computer vision, and deep learning systems.</p>
-                    <p>My work spans from real-time defect detection systems at EssilorLuxottica to 3D object detection for autonomous vehicles, energy-aware MLLM optimization at Argonne Laboratory, and quantum-compatible neural architectures.</p>
-                    <p>I'm passionate about bridging the gap between cutting-edge research and production-ready systems, with a focus on performance optimization and hardware acceleration.</p>
-                </div>
-                <div>
-                    <h3 style="margin-bottom: 1rem;">Core Technologies</h3>
-                    <div class="skills-grid">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">C++</span>
-                        <span class="skill-tag">PyTorch</span>
-                        <span class="skill-tag">TensorFlow</span>
-                        <span class="skill-tag">CUDA</span>
-                        <span class="skill-tag">OpenCV</span>
-                        <span class="skill-tag">ROS</span>
-                        <span class="skill-tag">TensorRT</span>
-                        <span class="skill-tag">ONNX</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">SLURM</span>
-                        <span class="skill-tag">vLLM</span>
-                        <span class="skill-tag">Qiskit</span>
-                        <span class="skill-tag">MLIR</span>
-                        <span class="skill-tag">Apache Spark</span>
-                    </div>
-                </div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <section id="about">
+            <p class="intro-text">
+                I'm a computer scientist specializing in machine learning, computer vision, and autonomous systems. My current research focuses on energy-aware optimization for multimodal large language models and quantum-compatible neural architectures. I'm particularly interested in bridging theoretical advances with production-ready systems that operate efficiently on heterogeneous hardware.
+            </p>
+            <p class="intro-text">
+                Before working with MLLMs, I spent time developing perception systems for autonomous vehicles, creating 3D object detection models with multi-view fusion, and optimizing real-time defect detection at EssilorLuxottica. This work gave me deep insights into how computational efficiency and algorithmic innovation can transform practical applications.
+            </p>
+            <p class="intro-text">
+                I'm a dual Master's student at University of Illinois Chicago and Politecnico di Milano, where I explore the intersection of hardware acceleration, deep learning, and neuromorphic computing.
+            </p>
+
+            <div class="skills-container">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">C++</span>
+                <span class="skill-tag">PyTorch</span>
+                <span class="skill-tag">TensorFlow</span>
+                <span class="skill-tag">CUDA</span>
+                <span class="skill-tag">OpenCV</span>
+                <span class="skill-tag">ROS</span>
+                <span class="skill-tag">TensorRT</span>
+                <span class="skill-tag">ONNX</span>
+                <span class="skill-tag">vLLM</span>
+                <span class="skill-tag">Qiskit</span>
+                <span class="skill-tag">MLIR</span>
+                <span class="skill-tag">Apache Spark</span>
+                <span class="skill-tag">Docker</span>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="education">
-        <div class="container">
-            <h2 class="section-title">Education</h2>
-            <div class="education-grid">
-                <div class="education-card">
-                    <h3>University of Illinois Chicago</h3>
-                    <div class="degree">Master of Science in Computer Science</div>
-                    <div class="date">Feb 2025 - Dec 2026</div>
-                    <div class="courses">Advanced Algorithms, Machine Learning, Data Mining, Advanced Operating Systems</div>
+        <section id="education">
+            <h2>Education</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <span class="institution">University of Illinois Chicago</span>
+                    <span class="date">Feb 2025 – Dec 2026</span>
                 </div>
-                <div class="education-card">
-                    <h3>Politecnico di Milano</h3>
-                    <div class="degree">Master of Science in Computer Science</div>
-                    <div class="date">Sep 2024 - Dec 2026</div>
-                    <div class="courses">Distributed Systems, Artificial Intelligence, Deep Learning, Software Engineering, Data Science</div>
-                </div>
-                <div class="education-card">
-                    <h3>Politecnico di Milano</h3>
-                    <div class="degree">Bachelor of Science in Computer Engineering</div>
-                    <div class="date">Sep 2021 - Sep 2024</div>
-                    <div class="courses">Computer Architecture, Databases, Operating Systems, Networks, Algorithms and Data Structures</div>
-                </div>
+                <p class="position">Master of Science in Computer Science</p>
+                <p>Advanced Algorithms, Machine Learning, Data Mining, Advanced Operating Systems</p>
             </div>
-        </div>
-    </section>
 
-    <section id="experience">
-        <div class="container">
-            <h2 class="section-title">Experience</h2>
-
-            <div class="experience-item">
-                <div class="experience-header">
-                    <div>
-                        <h3>Computer Vision Engineer</h3>
-                        <p style="color: var(--gray); margin-top: 0.3rem;">EssilorLuxottica Smart Eyewear Lab | Milan, Italy</p>
-                    </div>
-                    <div class="date">Jul 2025 – Sep 2025</div>
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <span class="institution">Politecnico di Milano</span>
+                    <span class="date">Sep 2024 – Dec 2026</span>
                 </div>
+                <p class="position">Master of Science in Computer Science</p>
+                <p>Distributed Systems, Artificial Intelligence, Deep Learning, Software Engineering, Data Science</p>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <span class="institution">Politecnico di Milano</span>
+                    <span class="date">Sep 2021 – Sep 2024</span>
+                </div>
+                <p class="position">Bachelor of Science in Computer Engineering</p>
+                <p>Computer Architecture, Databases, Operating Systems, Networks, Algorithms and Data Structures</p>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>Experience</h2>
+            
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <span class="institution">EssilorLuxottica Smart Eyewear Lab</span>
+                    <span class="date">Jul 2025 – Sep 2025</span>
+                </div>
+                <p class="position">Computer Vision Engineer, Milan, Italy</p>
                 <ul>
                     <li>Engineered scalable computer vision software for real-time defect detection using YOLO models, enhancing product quality and reliability across manufacturing lines</li>
-                    <li>Optimized model inference pipeline (quantization, pruning) reducing latency while maintaining precision — accelerating on-device deployment</li>
+                    <li>Optimized model inference pipeline through quantization and pruning, reducing latency while maintaining precision for on-device deployment</li>
                     <li>Designed validation experiments to measure business impact, ensuring solutions were statistically sound and production-ready</li>
                 </ul>
-                <div class="skills-grid" style="margin-top: 1.5rem;">
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">Apache Spark</span>
-                    <span class="skill-tag">PyTorch</span>
-                    <span class="skill-tag">YOLO</span>
-                    <span class="skill-tag">ONNX</span>
-                    <span class="skill-tag">TensorRT</span>
-                    <span class="skill-tag">OpenCV</span>
-                    <span class="skill-tag">CUDA</span>
-                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="projects">
-        <div class="container">
-            <h2 class="section-title">Research & Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>Machine Learning Engineer</h3>
-                    <p class="location">AIDA Autonomous Driving Team | Politecnico di Milano</p>
-                    <p style="color: var(--gray); margin-bottom: 1rem; font-size: 0.9rem;">Jan 2025 – Sep 2025</p>
-                    <ul>
-                        <li>Improved camera-based 3D object detection for autonomous vehicles using multi-view fusion and real-world datasets</li>
-                        <li>Enhanced inference speed and precision through CUDA-level optimization and model pruning</li>
-                        <li>Integrated training and evaluation pipelines in PyTorch, testing on real driving data and simulation environments</li>
-                    </ul>
-                </div>
+        <section id="research" class="projects-section">
+            <h2>Research & Projects</h2>
 
-                <div class="project-card">
-                    <h3>Energy-Aware MLLM Inference Optimization</h3>
-                    <p class="location">University of Illinois Chicago - Argonne Laboratory</p>
-                    <p style="color: var(--gray); margin-bottom: 1rem; font-size: 0.9rem;">Oct 2025 – Present</p>
-                    <ul>
-                        <li>Building an energy-aware inference framework with workload characterization, power profiling, and multi-objective optimization</li>
-                        <li>Developing automated pipelines to measure latency, TTFT, throughput, power, and energy across heterogeneous hardware</li>
-                        <li>Implementing parameter-sweep engines to systematically explore system- and model-level configurations</li>
-                    </ul>
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <span class="institution">University of Illinois Chicago – Argonne Laboratory</span>
+                    <span class="date">Oct 2025 – Present</span>
                 </div>
-
-                <div class="project-card">
-                    <h3>Neuromorphic Computing on Ryzen AI NPU</h3>
-                    <p class="location">NECST Lab | Milan, Italy</p>
-                    <p style="color: var(--gray); margin-bottom: 1rem; font-size: 0.9rem;">Mar 2025 – Sep 2025</p>
-                    <ul>
-                        <li>Developed MLIR pipelines and backend optimizations for low-latency inference on AMD AI NPUs</li>
-                        <li>Designed parallel runtime mechanisms for asynchronous sensor and neural event processing</li>
-                    </ul>
-                </div>
-
-                <div class="project-card">
-                    <h3>Haar-MF-Net: Quantum-Compatible Haar Wavelet Networks</h3>
-                    <p class="location">University of Illinois Chicago</p>
-                    <p style="color: var(--gray); margin-bottom: 1rem; font-size: 0.9rem;">Jan 2026 – Present</p>
-                    <ul>
-                        <li>Extended HTMA-Net with Haar Wavelet Transform for multi-resolution CNNs, achieving 52% MAC reduction with O(1) quantum complexity via Hadamard gates on IBM-Q</li>
-                        <li>Implemented hybrid quantum-classical pipeline with multiplication-free operators, training ResNet variants on CIFAR-10/ImageNet</li>
-                    </ul>
-                </div>
+                <h3>Energy-Aware MLLM Inference Optimization</h3>
+                <ul>
+                    <li>Building an energy-aware inference framework with workload characterization, power profiling, and multi-objective optimization</li>
+                    <li>Developing automated pipelines to measure latency, TTFT, throughput, power, and energy across heterogeneous hardware</li>
+                    <li>Implementing parameter-sweep engines to systematically explore system- and model-level configurations</li>
+                </ul>
             </div>
-        </div>
-    </section>
 
-    <section id="achievements">
-        <div class="container">
-            <h2 class="section-title">Achievements</h2>
-            <div class="achievements-grid">
-                <div class="achievement-card">
-                    <h3>🏆 Best First-Year Student</h3>
-                    <p>Awarded "Best First-Year Student" in Computer Engineering (2021) for outstanding academic performance and technical excellence at Politecnico di Milano.</p>
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <span class="institution">AIDA Autonomous Driving Team, Politecnico di Milano</span>
+                    <span class="date">Jan 2025 – Sep 2025</span>
                 </div>
-                <div class="achievement-card">
-                    <h3>🎯 Finalist – 2025 AMD OpenHW Competition</h3>
-                    <p>Developed and optimized hardware-accelerated AI and system-level solutions for embedded architectures.</p>
+                <h3>3D Object Detection for Autonomous Vehicles</h3>
+                <ul>
+                    <li>Improved camera-based 3D object detection using multi-view fusion and real-world datasets</li>
+                    <li>Enhanced inference speed and precision through CUDA-level optimization and model pruning</li>
+                    <li>Integrated training and evaluation pipelines in PyTorch, testing on real driving data and simulation environments</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <span class="institution">University of Illinois Chicago</span>
+                    <span class="date">Jan 2026 – Present</span>
                 </div>
+                <h3>Haar-MF-Net: Quantum-Compatible Haar Wavelet Networks</h3>
+                <ul>
+                    <li>Extended HTMA-Net with Haar Wavelet Transform for multi-resolution CNNs, achieving 52% MAC reduction with O(1) quantum complexity via Hadamard gates on IBM-Q</li>
+                    <li>Implemented hybrid quantum-classical pipeline with multiplication-free operators, training ResNet variants on CIFAR-10/ImageNet</li>
+                </ul>
             </div>
-        </div>
-    </section>
 
-    <section id="contact">
-        <div class="container">
-            <h2 class="section-title">Let's Connect</h2>
-            <p style="font-size: 1.2rem; color: var(--gray); margin-bottom: 2rem;">
-                Interested in collaborating on ML/CV projects or discussing research opportunities?
-            </p>
-            <div class="contact-links">
-                <a href="mailto:vpall3@uic.edu">📧 Email</a>
-                <a href="https://github.com/vittpall" target="_blank">💻 GitHub</a>
-                <a href="https://linkedin.com/in/vittorio-palladino-41205a339/" target="_blank">💼 LinkedIn</a>
-                <a href="https://scholar.google.com/yourprofile" target="_blank">🎓 Google Scholar</a>
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <span class="institution">NECST Lab, Milan</span>
+                    <span class="date">Mar 2025 – Sep 2025</span>
+                </div>
+                <h3>Neuromorphic Computing on Ryzen AI NPU</h3>
+                <ul>
+                    <li>Developed MLIR pipelines and backend optimizations for low-latency inference on AMD AI NPUs</li>
+                    <li>Designed parallel runtime mechanisms for asynchronous sensor and neural event processing</li>
+                </ul>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer>
-        <p>&copy; 2026 Vittorio Palladino. Built with passion for ML & Computer Vision.</p>
-    </footer>
+        <section id="achievements">
+            <h2>Achievements</h2>
+            
+            <div class="achievement">
+                <h3>Best First-Year Student, Politecnico di Milano</h3>
+                <p>Awarded for outstanding academic performance and technical excellence in Computer Engineering (2021)</p>
+            </div>
+
+            <div class="achievement">
+                <h3>Finalist – 2025 AMD OpenHW Competition</h3>
+                <p>Developed and optimized hardware-accelerated AI and system-level solutions for embedded architectures</p>
+            </div>
+        </section>
+    </main>
 
     <script>
         // Smooth scrolling
@@ -634,38 +512,6 @@
                     });
                 }
             });
-        });
-
-        // Navbar background on scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(15, 15, 15, 0.98)';
-            } else {
-                nav.style.background = 'rgba(15, 15, 15, 0.95)';
-            }
-        });
-
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.education-card, .experience-item, .project-card, .achievement-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-            observer.observe(el);
         });
     </script>
 </body>
