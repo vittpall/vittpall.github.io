@@ -11,7 +11,8 @@
     :root {
       --text: #222;
       --muted: #555;
-      --link: #1a73e8;
+      --link: #4051b5;
+      --accent: #f09228;
       --bg: #ffffff;
       --border: #e6e6e6;
     }
@@ -48,6 +49,7 @@
       font-size: 2.2rem;
       font-weight: 500;
       margin-bottom: 1rem;
+      color: #4051b5;
     }
 
     p {
@@ -83,6 +85,7 @@
       font-size: 1.4rem;
       font-weight: 500;
       margin-bottom: 1.5rem;
+      color: var(--accent);
     }
 
     ul {
@@ -138,21 +141,25 @@
         <h1>Vittorio Palladino</h1>
 
         <p>
-          I am a computer scientist working on machine learning, computer vision,
-          and autonomous systems, with a focus on efficient and hardware-aware AI.
+          Hi, I am Vittorio! I am a dual Master's student at the
+          <a class="inline" href="https://www.uic.edu/">University of Illinois Chicago</a> and
+          <a class="inline" href="https://www.polimi.it/en">Politecnico di Milano</a>, working on machine
+          learning systems, computer vision, and autonomous systems.
         </p>
 
         <p>
-          I am currently a dual Master's student at the University of Illinois Chicago
-          and Politecnico di Milano. Incoming Researcher at UC Berkeley, working on
-          motion planning and state estimation for autonomous aircraft ground navigation.
+          In summer 2026 I joined <a class="inline" href="https://www.berkeley.edu/">UC Berkeley</a> as a
+          visiting research student in the <a class="inline" href="https://hiperlab.berkeley.edu/">HiPeRLab</a>,
+          advised by <a class="inline" href="https://hiperlab.berkeley.edu/members/mark-w-mueller/">Mark W. Mueller</a>,
+          working on motion planning and LiDAR-based perception for autonomous aircraft ground navigation.
         </p>
 
         <div class="links">
           <a href="mailto:vpall3@uic.edu">Email</a>
           <a href="https://github.com/vittpall">GitHub</a>
           <a href="https://linkedin.com/in/vittorio-palladino-41205a339/">LinkedIn</a>
-          <a href="#">CV</a>
+          <a href="https://scholar.google.com/citations?hl=en&user=c51QZEQAAAAJ">Google Scholar</a>
+          <a href="CV.pdf">CV</a>
         </div>
       </div>
 
@@ -168,7 +175,17 @@
       <ul>
         <li>
           <span class="date">2026</span>
-          Incoming Researcher at UC Berkeley — motion planning and LiDAR-based object detection for autonomous aircraft ground navigation.
+          <em>DynGhost</em> was accepted at <strong>MMSP 2026</strong> —
+          <a class="inline" href="https://arxiv.org/abs/2605.10185">preprint</a>.
+        </li>
+        <li>
+          <span class="date">2026</span>
+          <em>EnergyLens</em> submitted to <strong>SC 2026</strong> —
+          <a class="inline" href="https://arxiv.org/abs/2605.10556">preprint</a>.
+        </li>
+        <li>
+          <span class="date">2026</span>
+          Started visiting research at UC Berkeley — motion planning and LiDAR-based object detection for autonomous aircraft ground navigation.
         </li>
         <li>
           <span class="date">2026</span>
@@ -202,6 +219,22 @@
     <section>
       <h2>Publications</h2>
       <ul>
+        <li>
+          <strong>DynGhost: Temporally-Modelled Transformer for Dynamic Ghost Imaging with Quantum Detectors</strong><br/>
+          V. Palladino, A. E. Cetin<br/>
+          <span class="date">arXiv:2605.10185 · 2026 · Accepted at MMSP 2026</span><br/>
+          A transformer with joint spatial and temporal attention for ghost imaging of dynamic scenes, trained with a
+          quantum-aware framework that models Poisson single-photon detector statistics.
+          <a class="inline" href="https://arxiv.org/abs/2605.10185">arXiv</a>
+        </li>
+        <li>
+          <strong>EnergyLens: Interpretable Closed-Form Energy Models for Multimodal LLM Inference Serving</strong><br/>
+          V. Palladino, G. Palermo, M. E. Papka, Z. Lan<br/>
+          <span class="date">arXiv:2605.10556 · 2026 · Submitted to SC 2026</span><br/>
+          Symbolic regression over profiling data yields a twelve-parameter closed-form energy model that picks the
+          optimal serving configuration 88.2% of the time using ~50 profiling runs.
+          <a class="inline" href="https://arxiv.org/abs/2605.10556">arXiv</a>
+        </li>
         <li>
           <strong>WTHaar-Net: a Hybrid Quantum-Classical Approach</strong><br/>
           V. Palladino, T. Idden, A. E. Cetin<br/>
