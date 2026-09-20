@@ -1,20 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vittorio Palladino</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta name="author" content="Vittorio Palladino">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --text: #222;
-      --muted: #555;
-      --link: #4051b5;
-      --accent: #f09228;
-      --bg: #ffffff;
-      --border: #e6e6e6;
+    /* ===== themes ===== */
+    :root,
+    html[data-theme="dark"] {
+      --bg: #0d1117;
+      --term: #11161d;
+      --bar: #1b222c;
+      --text: #c9d1d9;
+      --muted: #6e7b8b;
+      --accent: #58d68d;
+      --accent2: #7aa2f7;
+      --hot: #f0883e;
+      --border: #263040;
+      --shadow: rgba(0, 0, 0, .5);
+    }
+
+    html[data-theme="light"] {
+      --bg: #e9e9e4;
+      --term: #fbfbf7;
+      --bar: #e2e2da;
+      --text: #24292f;
+      --muted: #6a737d;
+      --accent: #1a7f37;
+      --accent2: #0550ae;
+      --hot: #bc4c00;
+      --border: #d6d6cd;
+      --shadow: rgba(0, 0, 0, .15);
+    }
+
+    html[data-theme="amber"] {
+      --bg: #1a1206;
+      --term: #211705;
+      --bar: #2d1f08;
+      --text: #ffb642;
+      --muted: #9a7233;
+      --accent: #ffcf70;
+      --accent2: #ff9a1f;
+      --hot: #ff7043;
+      --border: #3d2a0b;
+      --shadow: rgba(0, 0, 0, .6);
+    }
+
+    html[data-theme="matrix"] {
+      --bg: #000a04;
+      --term: #01140a;
+      --bar: #04240f;
+      --text: #46f28a;
+      --muted: #2a8a53;
+      --accent: #9cffccff;
+      --accent2: #27d17a;
+      --hot: #d7ff6b;
+      --border: #0c3a1e;
+      --shadow: rgba(0, 0, 0, .7);
+    }
+
+    html[data-theme="synthwave"] {
+      --bg: #14032b;
+      --term: #1d0740;
+      --bar: #2a0b58;
+      --text: #e6d6ff;
+      --muted: #9b7fc4;
+      --accent: #ff4fd8;
+      --accent2: #5ce1e6;
+      --hot: #ffd166;
+      --border: #3c1478;
+      --shadow: rgba(0, 0, 0, .55);
     }
 
     * {
@@ -24,249 +83,771 @@
     }
 
     body {
-      font-family: Inter, sans-serif;
+      font-family: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.65;
+      font-size: 14px;
+      padding: 2rem 1rem 4rem;
+      transition: background .25s, color .25s;
     }
 
-    .container {
-      max-width: 900px;
-      margin: 4rem auto;
-      padding: 0 1.5rem;
-    }
-
-    /* Header */
-    .header {
-      display: grid;
-      grid-template-columns: 1fr 220px;
-      gap: 3rem;
-      align-items: center;
-      margin-bottom: 4rem;
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      font-weight: 500;
-      margin-bottom: 1rem;
-      color: #4051b5;
-    }
-
-    p {
-      margin-bottom: 1rem;
-      color: var(--muted);
-    }
-
-    .links a {
-      color: var(--link);
+    a {
+      color: var(--accent2);
       text-decoration: none;
-      margin-right: 1rem;
-      font-size: 0.95rem;
     }
 
-    .links a:hover {
+    a:hover {
       text-decoration: underline;
     }
 
-    .photo {
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      object-fit: cover;
+    .muted {
+      color: var(--muted);
+    }
+
+    /* ===== terminal chrome ===== */
+    .term {
+      max-width: 940px;
+      margin: 0 auto;
       border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--term);
+      box-shadow: 0 18px 50px var(--shadow);
     }
 
-    /* Sections */
-    section {
-      margin-bottom: 3.5rem;
+    .titlebar {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      background: var(--bar);
+      border-bottom: 1px solid var(--border);
+      padding: .55rem .9rem;
+      position: sticky;
+      top: 0;
+      z-index: 5;
     }
 
-    h2 {
-      font-size: 1.4rem;
-      font-weight: 500;
-      margin-bottom: 1.5rem;
+    .dots {
+      display: flex;
+      gap: .4rem;
+    }
+
+    .dots i {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .dots i:nth-child(1) { background: #ff5f57; }
+    .dots i:nth-child(2) { background: #febc2e; }
+    .dots i:nth-child(3) { background: #28c840; }
+
+    .title {
+      color: var(--muted);
+      font-size: .8rem;
+      flex: 1;
+      text-align: center;
+    }
+
+    .themebtn {
+      font: inherit;
+      font-size: .75rem;
+      color: var(--text);
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: .15rem .55rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .themebtn:hover {
+      border-color: var(--accent);
       color: var(--accent);
     }
 
-    ul {
+    .screen {
+      padding: 1.4rem 1.6rem 2rem;
+    }
+
+    /* ===== prompt lines ===== */
+    .login {
+      color: var(--muted);
+      font-size: .8rem;
+      margin-bottom: 1rem;
+    }
+
+    .cmd {
+      margin: 2.2rem 0 .8rem;
+      color: var(--text);
+    }
+
+    .prompt {
+      color: var(--accent);
+      font-weight: 700;
+      margin-right: .5rem;
+    }
+
+    .pe {
+      color: var(--accent2);
+    }
+
+    .out {
+      padding-left: .4rem;
+    }
+
+    .out p {
+      margin-bottom: .9rem;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 9px;
+      height: 1.05em;
+      background: var(--accent);
+      vertical-align: -.18em;
+      animation: blink 1.1s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* ===== banner ===== */
+    .banner {
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      padding: .9rem 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .bline {
+      white-space: normal;
+    }
+
+    .bk {
+      display: inline-block;
+      width: 78px;
+      color: var(--hot);
+    }
+
+    .name {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ===== whoami ===== */
+    .headshot {
+      float: right;
+      width: 190px;
+      margin: 0 0 1rem 1.4rem;
+      text-align: center;
+    }
+
+    .headshot img {
+      width: 190px;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      filter: saturate(.95);
+    }
+
+    .cap {
+      font-size: .75rem;
+      color: var(--muted);
+      margin-top: .4rem;
+    }
+
+    /* ===== contact ===== */
+    .contact p {
+      margin-bottom: .2rem;
+    }
+
+    .contact .k {
+      display: inline-block;
+      width: 110px;
+      color: var(--hot);
+    }
+
+    /* ===== news ===== */
+    ul.news {
       list-style: none;
     }
 
-    li {
-      margin-bottom: 0.8rem;
-      color: var(--muted);
+    ul.news li {
+      margin-bottom: .55rem;
+      padding-left: 1.1rem;
+      text-indent: -1.1rem;
+    }
+
+    ul.news li::before {
+      content: "› ";
+      color: var(--accent);
     }
 
     .date {
-      color: #888;
-      font-size: 0.9rem;
-      margin-right: 0.4rem;
+      color: var(--hot);
+      margin-right: .35rem;
     }
 
-    a.inline {
-      color: var(--link);
-      text-decoration: none;
+    /* ===== items ===== */
+    .item {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 1.2rem;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      background: linear-gradient(0deg, transparent, transparent);
     }
 
-    a.inline:hover {
-      text-decoration: underline;
+    .item.feat {
+      border-color: var(--accent);
     }
 
-    hr {
-      border: none;
+    .item .thumb img {
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .item.nothumb {
+      grid-template-columns: 1fr;
+    }
+
+    .ptitle {
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: .2rem !important;
+    }
+
+    .ptitle a {
+      color: var(--accent);
+    }
+
+    .authors {
+      margin-bottom: .2rem !important;
+      color: var(--muted);
+    }
+
+    .me {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .venue {
+      color: var(--muted);
+      font-size: .85rem;
+      margin-bottom: .5rem !important;
+    }
+
+    .venue.hot {
+      color: var(--hot);
+    }
+
+    .links a {
+      margin-right: .7rem;
+      font-size: .85rem;
+    }
+
+    .links a::before {
+      content: "[";
+      color: var(--muted);
+    }
+
+    .links a::after {
+      content: "]";
+      color: var(--muted);
+    }
+
+    .abs {
+      display: none;
+      margin-top: .7rem;
+      padding: .7rem .85rem;
+      border-left: 2px solid var(--accent);
+      background: rgba(127, 127, 127, .07);
+      color: var(--muted);
+      font-size: .85rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .abs.open {
+      display: block;
+    }
+
+    /* ===== gallery ===== */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: .7rem;
+      margin: 1rem 0;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .foot {
+      margin-top: 2.5rem;
+      padding-top: 1rem;
       border-top: 1px solid var(--border);
-      margin: 3rem 0;
+      font-size: .78rem;
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .header {
+    /* ===== lightbox ===== */
+    .item .thumb img {
+      cursor: zoom-in;
+      transition: opacity .15s, border-color .15s;
+    }
+
+    .item .thumb img:hover {
+      opacity: .85;
+      border-color: var(--accent);
+    }
+
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0, 0, 0, .86);
+      backdrop-filter: blur(3px);
+      padding: 2rem 1rem 1rem;
+      cursor: zoom-out;
+    }
+
+    #lightbox.open {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .8rem;
+    }
+
+    #lightbox img {
+      max-width: 100%;
+      max-height: calc(100vh - 7rem);
+      object-fit: contain;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--term);
+      cursor: default;
+    }
+
+    #lb-cap {
+      color: var(--muted);
+      font-size: .8rem;
+      text-align: center;
+      max-width: 60ch;
+    }
+
+    #lb-nav {
+      display: none;
+      gap: .5rem;
+      align-items: center;
+      cursor: default;
+    }
+
+    #lb-nav.on {
+      display: flex;
+    }
+
+    #lb-nav button {
+      font: inherit;
+      color: var(--text);
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: .2rem .7rem;
+      cursor: pointer;
+    }
+
+    #lb-nav button:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    #lb-count {
+      color: var(--muted);
+      font-size: .8rem;
+      min-width: 4.5rem;
+      text-align: center;
+    }
+
+    #lb-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      font: inherit;
+      font-size: 1.3rem;
+      line-height: 1;
+      color: var(--text);
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: .25rem .6rem;
+      cursor: pointer;
+    }
+
+    #lb-close:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 720px) {
+      .item {
         grid-template-columns: 1fr;
-        text-align: center;
       }
 
-      .photo {
-        margin: 0 auto;
+      .headshot {
+        float: none;
+        margin: 0 auto 1rem;
+      }
+
+      .bk, .contact .k {
+        display: block;
+        width: auto;
+      }
+
+      .title {
+        display: none;
       }
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
-
-    <!-- Header -->
-    <div class="header">
-      <div>
-        <h1>Vittorio Palladino</h1>
-
-        <p>
-          Hi, I am Vittorio! I am a dual Master's student at the
-          <a class="inline" href="https://www.uic.edu/">University of Illinois Chicago</a> and
-          <a class="inline" href="https://www.polimi.it/en">Politecnico di Milano</a>, working on machine
-          learning systems, computer vision, and autonomous systems.
-        </p>
-
-        <p>
-          In summer 2026 I joined <a class="inline" href="https://www.berkeley.edu/">UC Berkeley</a> as a
-          visiting research student in the <a class="inline" href="https://hiperlab.berkeley.edu/">HiPeRLab</a>,
-          advised by <a class="inline" href="https://hiperlab.berkeley.edu/members/mark-w-mueller/">Mark W. Mueller</a>,
-          working on motion planning and LiDAR-based perception for autonomous aircraft ground navigation.
-        </p>
-
-        <div class="links">
-          <a href="mailto:vpall3@uic.edu">Email</a>
-          <a href="https://github.com/vittpall">GitHub</a>
-          <a href="https://linkedin.com/in/vittorio-palladino-41205a339/">LinkedIn</a>
-          <a href="https://scholar.google.com/citations?hl=en&user=c51QZEQAAAAJ">Google Scholar</a>
-          <a href="CV.pdf">CV</a>
-        </div>
-      </div>
-
-      <!-- Replace with your image -->
-      <img src="profile.jpeg" alt="Vittorio Palladino" class="photo"/>
+  <main class="term">
+    <div class="titlebar">
+      <span class="dots"><i></i><i></i><i></i></span>
+      <span class="title">vittorio@web: ~ — zsh</span>
+      <button class="themebtn" id="themebtn" onclick="cycleTheme()" title="change color scheme">theme: dark</button>
     </div>
 
-    <hr/>
+    <div class="screen">
 
-    <!-- News -->
-    <section>
-      <h2>News</h2>
-      <ul>
-        <li>
-          <span class="date">2026</span>
-          <em>DynGhost</em> was accepted at <strong>MMSP 2026</strong> —
-          <a class="inline" href="https://arxiv.org/abs/2605.10185">preprint</a>.
-        </li>
-        <li>
-          <span class="date">2026</span>
-          <em>EnergyLens</em> submitted to <strong>SC 2026</strong> —
-          <a class="inline" href="https://arxiv.org/abs/2605.10556">preprint</a>.
-        </li>
-        <li>
-          <span class="date">2026</span>
-          Started visiting research at UC Berkeley — motion planning and LiDAR-based object detection for autonomous aircraft ground navigation.
-        </li>
-        <li>
-          <span class="date">2026</span>
-          Paper submitted to ECCV: <em>WTHaar-Net: a Hybrid Quantum-Classical Approach</em> — hybrid quantum-classical CNN using Haar Wavelet Transform, validated on IBM Quantum hardware.
-        </li>
-        <li>
-          <span class="date">2026</span>
-          Research Assistant at UIC — developing energy-aware inference framework for Multimodal LLMs, profiling power and throughput across heterogeneous GPU hardware.
-        </li>
-        <li>
-          <span class="date">2025</span>
-          Computer Vision Engineer at EssilorLuxottica Smart Eyewear Lab — real-time defect detection with YOLO, model optimization and on-device deployment.
-        </li>
-        <li>
-          <span class="date">2025</span>
-          Machine Learning Engineer at AIDA Autonomous Driving Team (Politecnico di Milano) — camera-based 3D object detection for autonomous vehicles.
-        </li>
-      </ul>
-    </section>
+      <!-- ===== login banner ===== -->
+      <p class="login">Last login: Sun Sep 20 09:14 on ttys001</p>
+      <div class="banner">
+        <div class="bline"><span class="bk">name</span><span class="name">Vittorio Palladino</span></div>
+        <div class="bline"><span class="bk">role</span>Visiting Research Student · <a href="https://hiperlab.berkeley.edu/">HiPeRLab, UC Berkeley</a></div>
+        <div class="bline"><span class="bk">focus</span>robotics and perception · optimization</div>
+        <div class="bline"><span class="bk">edu</span>MSc · <a href="https://www.uic.edu/">University of Illinois Chicago</a> &nbsp;|&nbsp; MSc · <a href="https://www.polimi.it/en">Politecnico di Milano</a></div>
+        <div class="bline"><span class="bk">shell</span><span class="muted">/bin/zsh</span></div>
+      </div>
 
-    <!-- Research -->
-    <section>
-      <h2>Research</h2>
-      <p>
-        My research interests include machine learning systems, computer vision,
-        autonomous systems, and efficient neural architectures.
-      </p>
-    </section>
+      <!-- ===== whoami ===== -->
+      <p class="cmd"><span class="prompt">vittorio@web<span class="pe">:~$</span></span> whoami</p>
+      <div class="out">
+        <div class="headshot">
+          <img src="assets/profile/profile.jpeg" alt="profile photo of Vittorio Palladino">
+          <div class="cap">Vittorio Palladino</div>
+        </div>
+        <p>
+          Hi, I am Vittorio! I am a dual Master's student at the
+          <a href="https://www.uic.edu/">University of Illinois Chicago</a> and
+          <a href="https://www.polimi.it/en">Politecnico di Milano</a>, working on machine learning
+          systems and optimization.
+        </p>
+        <p>
+          In summer 2026 I joined <a href="https://www.berkeley.edu/">UC Berkeley</a> as a visiting research
+          student in the <a href="https://hiperlab.berkeley.edu/">HiPeRLab</a>, advised by
+          <a href="https://hiperlab.berkeley.edu/members/mark-w-mueller/">Prof. Mark W. Mueller</a>, working on
+          occlusion aware motion planning and LiDAR-based perception for autonomous UAV.
+        </p>
+        <p>
+          I am highly interested in safe motion planning, perception and optimization.
+        </p>
+      </div>
 
-    <!-- Publications -->
-    <section>
-      <h2>Publications</h2>
-      <ul>
-        <li>
-          <strong>DynGhost: Temporally-Modelled Transformer for Dynamic Ghost Imaging with Quantum Detectors</strong><br/>
-          V. Palladino, A. E. Cetin<br/>
-          <span class="date">arXiv:2605.10185 · 2026 · Accepted at MMSP 2026</span><br/>
-          A transformer with joint spatial and temporal attention for ghost imaging of dynamic scenes, trained with a
-          quantum-aware framework that models Poisson single-photon detector statistics.
-          <a class="inline" href="https://arxiv.org/abs/2605.10185">arXiv</a>
-        </li>
-        <li>
-          <strong>EnergyLens: Interpretable Closed-Form Energy Models for Multimodal LLM Inference Serving</strong><br/>
-          V. Palladino, G. Palermo, M. E. Papka, Z. Lan<br/>
-          <span class="date">arXiv:2605.10556 · 2026 · Submitted to SC 2026</span><br/>
-          Symbolic regression over profiling data yields a twelve-parameter closed-form energy model that picks the
-          optimal serving configuration 88.2% of the time using ~50 profiling runs.
-          <a class="inline" href="https://arxiv.org/abs/2605.10556">arXiv</a>
-        </li>
-        <li>
-          <strong>WTHaar-Net: a Hybrid Quantum-Classical Approach</strong><br/>
-          V. Palladino, T. Idden, A. E. Cetin<br/>
-          <span class="date">arXiv:2603.02497 · 2026 · Submitted to ECCV</span><br/>
-          Hybrid quantum-classical CNN using Haar Wavelet Transform, achieving parameter reduction with competitive accuracy on CIFAR-10 and Tiny-ImageNet; validated on IBM Quantum hardware.
-        </li>
-      </ul>
-    </section>
+      <!-- ===== contact ===== -->
+      <p class="cmd"><span class="prompt">vittorio@web<span class="pe">:~$</span></span> cat contact.txt</p>
+      <div class="out contact">
+        <p><span class="k">email</span>[<a href="mailto:vpall3@uic.edu">vpall3@uic.edu</a>]</p>
+        <p><span class="k">cv</span>[<a href="CV.pdf">CV.pdf</a>]</p>
+        <p><span class="k">scholar</span>[<a href="https://scholar.google.com/citations?hl=en&user=c51QZEQAAAAJ">Google Scholar</a>]</p>
+        <p><span class="k">github</span>[<a href="https://github.com/vittpall">github.com/vittpall</a>]</p>
+        <p><span class="k">linkedin</span>[<a href="https://linkedin.com/in/vittorio-palladino-41205a339/">LinkedIn</a>]</p>
+      </div>
 
-    <!-- Experience -->
-    <section>
-      <h2>Experience</h2>
-      <ul>
-        <li>
-          <strong>UC Berkeley</strong> — Incoming Researcher (Summer 2026)<br/>
-          Motion planning and state estimation for commercial aircraft on airport grounds. LiDAR-based object detection and classification.
-        </li>
-        <li>
-          <strong>University of Illinois Chicago</strong> — Research Assistant (Jan 2026 – Present)<br/>
-          Energy-aware inference framework for Multimodal LLMs. GPU/CPU telemetry, vLLM, NVML-based power profiling.
-        </li>
-        <li>
-          <strong>EssilorLuxottica Smart Eyewear Lab</strong> — Computer Vision Engineer (Jul–Sep 2025)<br/>
-          Real-time defect detection with YOLO models, model quantization and pruning, on-device deployment.
-        </li>
-        <li>
-          <strong>AIDA Autonomous Driving Team</strong> — ML Engineer (Jan–Sep 2025)<br/>
-          Camera-based 3D object detection for autonomous vehicles with PyTorch, tested on real driving data and simulation.
-        </li>
-      </ul>
-    </section>
+      <!-- ===== news ===== -->
+      <p class="cmd"><span class="prompt">vittorio@web<span class="pe">:~$</span></span> tail news.log</p>
+      <div class="out">
+        <ul class="news">
+          <li><span class="date">[2026]</span> <i>OA-MPPI</i>, our occlusion-aware planner for quadrotor flight, is under review at <i>ICRA 2027</i>.</li>
+          <li><span class="date">[2026]</span> <i>FLAME</i> is under review at <i>ACM Transactions on Mathematical Software</i>.</li>
+          <li><span class="date">[2026]</span> Our paper <a href="https://arxiv.org/abs/2605.10185">DynGhost</a> is accepted at <i>MMSP 2026</i>!</li>
+          <li><span class="date">[2026]</span> <a href="https://arxiv.org/abs/2605.10556">EnergyLens</a> submitted to <i>PDP 2026</i>.</li>
+          <li><span class="date">[2026]</span> Started visiting research at UC Berkeley — motion planning and LiDAR-based object detection for autonomous aircraft ground navigation.</li>
+          <li><span class="date">[2026]</span> Research Assistant at UIC — energy-aware optimization framework for multimodal LLMs.</li>
+          <li><span class="date">[2025]</span> Computer Vision Engineer at EssilorLuxottica Smart Eyewear Lab.</li>
+          <li><span class="date">[2025]</span> Project at AIDA Autonomous Driving Team, Politecnico di Milano.</li>
+        </ul>
+      </div>
 
+      <!-- ===== research ===== -->
+      <p class="cmd"><span class="prompt">vittorio@web<span class="pe">:~$</span></span> ls -lh ~/research</p>
+      <div class="out">
+
+        <article class="item feat">
+          <div class="thumb" data-figs="assets/images_paper/OA-MPPI.gif,assets/images_paper/OA-MPPI_2.gif">
+            <img loading="lazy" src="assets/images_paper/OA-MPPI.gif" alt="OA-MPPI occlusion-aware quadrotor flight">
+          </div>
+          <div class="meta">
+            <p class="ptitle">OA-MPPI: Obstacle- and Occlusion-Aware Model Predictive Path Integral Control for Quadrotor Flight</p>
+            <p class="authors"><span class="me">Vittorio Palladino</span>, Teaya Yang, Ruiqi Zhang, Mark W. Mueller</p>
+            <p class="venue hot">In review: International Conference on Robotics and Automation (ICRA), 2027</p>
+            <div class="links">
+              <a href="javascript:void(0)" onclick="toggleAbs('oampi')">abstract</a>
+            </div>
+            <p class="abs" id="oampi">Autonomous UAV flight through cluttered and partially unknown environments
+              requires reasoning not only about observed obstacles but also about occluded regions that the sensor
+              cannot observe. We present OA-MPPI, an obstacle- and occlusion-aware extension of Model Predictive Path
+              Integral (MPPI) control for quadrotor flight that accounts for potential moving agents emerging from
+              these regions into the vehicle's path. At every planning step, we extract a 3D occlusion boundary from
+              the online occupancy map and use it to model the regions that hidden agents could reach over the
+              prediction horizon. We penalize trajectories that enter these expanding regions within MPPI rollouts
+              generated using nonlinear quadrotor dynamics and accounting for individual rotor thrust limits. We
+              validate the proposed approach in simulation and hardware flight experiments, with the complete pipeline
+              running onboard the vehicle in real time. Results show increased clearance from occlusion boundaries
+              compared to baseline MPPI in both settings, as well as avoidance of an agent emerging from occlusion in
+              simulation.</p>
+          </div>
+        </article>
+
+
+        <article class="item">
+          <div class="thumb">
+            <img loading="lazy" src="assets/images_paper/FLAME.png" alt="FLAME mixed-precision quantization framework">
+          </div>
+          <div class="meta">
+            <p class="ptitle">FLAME: A Deployable Framework for Layer-wise Automatic Mixed-Precision Quantization on Embedded Devices</p>
+            <p class="authors">Greta Corti, Matteo Vitali, <span class="me">Vittorio Palladino</span>, Nicol&ograve; Vacis,
+              Luca Merigo, Sara Pid&ograve;, Matteo Matteucci</p>
+            <p class="venue hot">In review: ACM Transactions on Mathematical Software &middot; </p>
+            <div class="links">
+              <a href="javascript:void(0)" onclick="toggleAbs('flame')">abstract</a>
+            </div>
+            <p class="abs" id="flame">Deploying deep neural networks on resource-constrained embedded devices requires
+              models that are both accurate and efficient in memory footprint and compute cost. Uniform INT8
+              quantization is simple and widely supported by embedded inference toolchains, but it can degrade accuracy
+              beyond acceptable limits for tasks sensitive to low-precision arithmetic. Mixed-precision quantization can
+              recover accuracy by assigning different precisions to different layers, but it introduces a combinatorial
+              search problem, and many existing methods require retraining or lack a complete path to deployment. We
+              introduce FLAME, a training-free ONNX-based framework for automatic mixed-precision quantization
+              targeting embedded deployment. Given a pretrained PyTorch model, FLAME converts it to ONNX, estimates
+              layer-wise sensitivity via statistical distances between FP32 and INT8 activations, and applies a genetic
+              algorithm guided by a sigmoid-gated fitness function over task performance, model size, and CPU-measured
+              inference time. We validate FLAME on YOLOv8n-Pose, MobileNetV2, and DeepLabV3, and deploy selected
+              configurations on STM32N6 and GAP9. Results show that FLAME recovers much of the accuracy lost under
+              uniform INT8 quantization while preserving significant compression and exposing practical deployment
+              trade-offs on real hardware.</p>
+          </div>
+        </article>
+
+        <article class="item nothumb">
+          <div class="meta">
+            <p class="ptitle"><a href="https://arxiv.org/abs/2605.10185">DynGhost: Temporally-Modelled Transformer for Dynamic Ghost Imaging</a></p>
+            <p class="authors"><span class="me">Vittorio Palladino</span>, A. E. Cetin</p>
+            <p class="venue hot">Accepted: Multimedia Signal Processing (MMSP), 2026 &middot; arXiv:2605.10185</p>
+            <div class="links">
+              <a href="javascript:void(0)" onclick="toggleAbs('dynghost')">abstract</a>
+              <a href="https://arxiv.org/abs/2605.10185">arXiv</a>
+            </div>
+            <p class="abs" id="dynghost">Ghost imaging reconstructs spatial information from a single-pixel bucket
+                detector by correlating structured illumination patterns with scalar intensity
+                measurements. While deep learning approaches have achieved promising results
+                on static scenes, two critical limitations remain unaddressed: existing
+                architectures fail to exploit temporal coherence across frames, leaving dynamic
+                ghost imaging largely unsolved, and they assume additive Gaussian noise models
+                that do not reflect the true Poissonian statistics of real single-photon
+                hardware. We present \textbf{DynGhost} (Dynamic Ghost Imaging Transformer), a
+                transformer architecture that addresses both limitations through alternating
+                spatial and temporal attention blocks. Our detector-aware training framework,
+                based on physically accurate hardware simulations (SNSPDs, SPADs, SiPMs) and
+                Anscombe variance-stabilizing normalization, resolves the distribution shift
+                that causes classical models to fail under realistic hardware constraints.
+                Experiments across multiple benchmarks demonstrate that DynGhost outperforms
+                both traditional reconstruction methods and existing deep learning
+                architectures, with particular gains in dynamic and photon-starved settings.</p>
+          </div>
+        </article>
+
+        <article class="item">
+          <div class="thumb">
+            <img loading="lazy" src="assets/images_paper/EnergyLens.png" alt="EnergyLens energy model overview">
+          </div>
+          <div class="meta">
+            <p class="ptitle"><a href="https://arxiv.org/abs/2605.10556">EnergyLens: Interpretable Closed-Form Energy Models for Multimodal LLM Inference Serving</a></p>
+            <p class="authors"><span class="me">Vittorio Palladino</span>, G. Palermo, M. E. Papka, Z. Lan</p>
+            <p class="venue hot">In review: PDP 2026 &middot; arXiv:2605.10556</p>
+            <div class="links">
+              <a href="javascript:void(0)" onclick="toggleAbs('energylens')">abstract</a>
+              <a href="https://arxiv.org/abs/2605.10556">arXiv</a>
+            </div>
+            <p class="abs" id="energylens">As large language models span dense, mixture-of-experts, and state-space
+              architectures, execute on heterogeneous accelerators, and support multimodal workloads, optimizing
+              inference energy becomes as important as optimizing latency and throughput. Existing methods either treat
+              latency as an energy proxy or depend on data-hungry black-box surrogates. Both break down across
+              parallelism strategies: latency and energy optima diverge in 23.4% of our tested cases, while black-box
+              models require hundreds of samples to generalize across models and hardware platforms. We present
+              EnergyLens, which uses symbolic regression to discover a reusable, parallelism-aware structural
+              <i>template</i> for LLM inference energy. After this one-time structure-discovery process, the template
+              can be calibrated to a new model&ndash;hardware&ndash;workload combination using twelve coefficients. With
+              as few as 50 measurements, EnergyLens achieves 84.6% Top-1 configuration-selection accuracy, versus 60.9%
+              for the closest analytical baseline. It matches ensemble ML accuracy with 10&times; fewer samples, and
+              adapts to new platforms without modifying the template.</p>
+          </div>
+        </article>
+
+        <!-- <article class="item nothumb">
+          <div class="meta">
+            <p class="ptitle">WTHaar-Net: a Hybrid Quantum-Classical Approach</p>
+            <p class="authors"><span class="me">Vittorio Palladino</span>, T. Idden, A. E. Cetin</p>
+            <p class="venue">Submitted to ECCV &middot; arXiv:2603.02497</p>
+            <div class="links">
+              <a href="javascript:void(0)" onclick="toggleAbs('wthaar')">abstract</a>
+            </div>
+            <p class="abs" id="wthaar">A hybrid quantum-classical CNN built on the Haar Wavelet Transform, achieving
+              substantial parameter reduction with competitive accuracy on CIFAR-10 and Tiny-ImageNet. The approach is
+              validated end-to-end on IBM Quantum hardware, not only in simulation.</p>
+          </div>
+        </article> -->
+
+      </div>
+
+
+      <!-- ===== live prompt ===== -->
+      <p class="cmd"><span class="prompt">vittorio@web<span class="pe">:~$</span></span> <span class="cursor"></span></p>
+
+      <!-- ===== footer ===== -->
+      <div class="foot">
+        <span class="muted"># last updated 2026/09/20 · built with plain HTML &amp; CSS</span>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="lightbox" role="dialog" aria-modal="true" aria-label="figure viewer">
+    <button id="lb-close" onclick="closeLightbox()" aria-label="close">&times;</button>
+    <img id="lb-img" src="" alt="">
+    <p id="lb-cap"></p>
+    <div id="lb-nav">
+      <button onclick="lbStep(-1)" aria-label="previous figure">&larr; prev</button>
+      <span id="lb-count"></span>
+      <button onclick="lbStep(1)" aria-label="next figure">next &rarr;</button>
+    </div>
   </div>
+
+  <script>
+    var THEMES = ["dark", "light", "amber", "matrix", "synthwave"];
+
+    function applyTheme(t) {
+      document.documentElement.setAttribute("data-theme", t);
+      document.getElementById("themebtn").textContent = "theme: " + t;
+      try { localStorage.setItem("theme", t); } catch (e) { }
+    }
+
+    function cycleTheme() {
+      var cur = document.documentElement.getAttribute("data-theme") || "dark";
+      var i = THEMES.indexOf(cur);
+      applyTheme(THEMES[(i + 1) % THEMES.length]);
+    }
+
+    function toggleAbs(id) {
+      document.getElementById(id).classList.toggle("open");
+    }
+
+    /* ===== figure rotation: a new frame of reference on each refresh ===== */
+    function figsOf(thumb) {
+      var d = thumb.getAttribute("data-figs");
+      return d ? d.split(",") : [thumb.querySelector("img").getAttribute("src")];
+    }
+
+    function rotateFigs() {
+      var n = 0;
+      try {
+        n = (parseInt(localStorage.getItem("figrot"), 10) || 0) + 1;
+        localStorage.setItem("figrot", n);
+      } catch (e) {
+        n = Math.floor(Math.random() * 1000);
+      }
+      var thumbs = document.querySelectorAll(".item .thumb[data-figs]");
+      for (var i = 0; i < thumbs.length; i++) {
+        var figs = figsOf(thumbs[i]);
+        thumbs[i].querySelector("img").src = figs[n % figs.length];
+      }
+    }
+
+    /* ===== lightbox ===== */
+    var lbFigs = [], lbIdx = 0, lbAlt = "";
+
+    function lbShow() {
+      document.getElementById("lb-img").src = lbFigs[lbIdx];
+      document.getElementById("lb-img").alt = lbAlt;
+      document.getElementById("lb-cap").textContent = lbAlt;
+      document.getElementById("lb-count").textContent = (lbIdx + 1) + " / " + lbFigs.length;
+      document.getElementById("lb-nav").classList.toggle("on", lbFigs.length > 1);
+    }
+
+    function lbStep(d) {
+      lbIdx = (lbIdx + d + lbFigs.length) % lbFigs.length;
+      lbShow();
+    }
+
+    function openLightbox(thumb, img) {
+      lbFigs = figsOf(thumb);
+      lbAlt = img.alt;
+      var cur = img.getAttribute("src");
+      lbIdx = Math.max(0, lbFigs.indexOf(cur));
+      lbShow();
+      document.getElementById("lightbox").classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      document.getElementById("lightbox").classList.remove("open");
+      document.getElementById("lb-img").src = "";
+      document.body.style.overflow = "";
+    }
+
+    function lbOpen() {
+      return document.getElementById("lightbox").classList.contains("open");
+    }
+
+    document.addEventListener("click", function (e) {
+      var t = e.target;
+      var thumb = t.closest ? t.closest(".item .thumb") : null;
+      if (thumb && t.tagName === "IMG") {
+        openLightbox(thumb, t);
+      } else if (t.id === "lightbox") {
+        closeLightbox();
+      }
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (!lbOpen()) return;
+      if (e.key === "Escape") closeLightbox();
+      else if (e.key === "ArrowRight") lbStep(1);
+      else if (e.key === "ArrowLeft") lbStep(-1);
+    });
+
+    rotateFigs();
+
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem("theme"); } catch (e) { }
+      applyTheme(THEMES.indexOf(saved) >= 0 ? saved : "dark");
+    })();
+  </script>
 </body>
+
 </html>
