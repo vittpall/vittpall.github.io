@@ -20,6 +20,7 @@
       --accent: #58d68d;
       --accent2: #7aa2f7;
       --hot: #f0883e;
+      --ok: #2ea043;
       --border: #263040;
       --shadow: rgba(0, 0, 0, .5);
     }
@@ -33,6 +34,7 @@
       --accent: #1a7f37;
       --accent2: #0550ae;
       --hot: #bc4c00;
+      --ok: #116329;
       --border: #d6d6cd;
       --shadow: rgba(0, 0, 0, .15);
     }
@@ -46,6 +48,7 @@
       --accent: #ffcf70;
       --accent2: #ff9a1f;
       --hot: #ff7043;
+      --ok: #3a9d4a;
       --border: #3d2a0b;
       --shadow: rgba(0, 0, 0, .6);
     }
@@ -59,6 +62,7 @@
       --accent: #9cffccff;
       --accent2: #27d17a;
       --hot: #d7ff6b;
+      --ok: #1f8f4a;
       --border: #0c3a1e;
       --shadow: rgba(0, 0, 0, .7);
     }
@@ -72,6 +76,7 @@
       --accent: #ff4fd8;
       --accent2: #5ce1e6;
       --hot: #ffd166;
+      --ok: #2ea043;
       --border: #3c1478;
       --shadow: rgba(0, 0, 0, .55);
     }
@@ -241,18 +246,42 @@
     /* ===== whoami ===== */
     .headshot {
       float: right;
-      width: 190px;
+      width: 280px;
+      max-width: 100%;
       margin: 0 0 1rem 1.4rem;
       text-align: center;
     }
 
-    .headshot img {
-      width: 190px;
-      height: 190px;
-      object-fit: cover;
+    .carousel {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
       border-radius: 8px;
       border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .carousel img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       filter: saturate(.95);
+      opacity: 0;
+      transition: opacity .8s ease;
+    }
+
+    .carousel img.active {
+      opacity: 1;
+    }
+
+    .carousel {
+      cursor: zoom-in;
+    }
+
+    .carousel:hover {
+      border-color: var(--accent);
     }
 
     .cap {
@@ -296,7 +325,8 @@
     /* ===== items ===== */
     .item {
       display: grid;
-      grid-template-columns: 280px 1fr;
+      grid-template-columns: 220px 1fr;
+      align-items: start;
       gap: 1.2rem;
       padding: 1rem;
       border: 1px solid var(--border);
@@ -310,7 +340,11 @@
     }
 
     .item .thumb img {
+      display: block;
       width: 100%;
+      height: 140px;
+      object-fit: contain;
+      background: var(--bar);
       border-radius: 6px;
       border: 1px solid var(--border);
     }
@@ -347,6 +381,11 @@
 
     .venue.hot {
       color: var(--hot);
+    }
+
+    .venue.ok {
+      color: var(--ok);
+      font-weight: 700;
     }
 
     .links a {
@@ -541,15 +580,18 @@
         <div class="bline"><span class="bk">role</span>Visiting Research Student · <a href="https://hiperlab.berkeley.edu/">HiPeRLab, UC Berkeley</a></div>
         <div class="bline"><span class="bk">focus</span>robotics and perception · optimization</div>
         <div class="bline"><span class="bk">edu</span>MSc · <a href="https://www.uic.edu/">University of Illinois Chicago</a> &nbsp;|&nbsp; MSc · <a href="https://www.polimi.it/en">Politecnico di Milano</a></div>
-        <div class="bline"><span class="bk">shell</span><span class="muted">/bin/zsh</span></div>
       </div>
 
       <!-- ===== whoami ===== -->
       <p class="cmd"><span class="prompt">vittorio@web<span class="pe">:~$</span></span> whoami</p>
       <div class="out">
         <div class="headshot">
-          <img src="assets/profile/profile.jpeg" alt="profile photo of Vittorio Palladino">
-          <div class="cap">Vittorio Palladino</div>
+          <div class="carousel" id="carousel">
+            <img class="active" data-cap="UC Berkeley" src="assets/profile/Berkeley.jpg" alt="Vittorio at UC Berkeley">
+            <img data-cap="Drover Labs" src="assets/profile/droverlabs.jpg" alt="Vittorio at Drover Labs">
+            <img data-cap="Occlusion-aware MPPI" src="assets/profile/OA-MPPI.gif" alt="Occlusion-aware MPPI demo">
+          </div>
+          <div class="cap" id="carousel-cap">UC Berkeley</div>
         </div>
         <p>
           Hi, I am Vittorio! I am a dual Master's student at the
@@ -584,7 +626,7 @@
         <ul class="news">
           <li><span class="date">[2026]</span> <i>OA-MPPI</i>, our occlusion-aware planner for quadrotor flight, is under review at <i>ICRA 2027</i>.</li>
           <li><span class="date">[2026]</span> <i>FLAME</i> is under review at <i>ACM Transactions on Mathematical Software</i>.</li>
-          <li><span class="date">[2026]</span> Our paper <a href="https://arxiv.org/abs/2605.10185">DynGhost</a> is accepted at <i>MMSP 2026</i>!</li>
+          <li><span class="date">[2026]</span> Our paper <a href="https://arxiv.org/abs/2605.10185">DynGhost</a> is accepted as an oral presentation at <i>MMSP 2026</i>!</li>
           <li><span class="date">[2026]</span> <a href="https://arxiv.org/abs/2605.10556">EnergyLens</a> submitted to <i>PDP 2026</i>.</li>
           <li><span class="date">[2026]</span> Started visiting research at UC Berkeley — motion planning and LiDAR-based object detection for autonomous aircraft ground navigation.</li>
           <li><span class="date">[2026]</span> Research Assistant at UIC — energy-aware optimization framework for multimodal LLMs.</li>
@@ -653,33 +695,6 @@
           </div>
         </article>
 
-        <article class="item nothumb">
-          <div class="meta">
-            <p class="ptitle"><a href="https://arxiv.org/abs/2605.10185">DynGhost: Temporally-Modelled Transformer for Dynamic Ghost Imaging</a></p>
-            <p class="authors"><span class="me">Vittorio Palladino</span>, A. E. Cetin</p>
-            <p class="venue hot">Accepted: Multimedia Signal Processing (MMSP), 2026 &middot; arXiv:2605.10185</p>
-            <div class="links">
-              <a href="javascript:void(0)" onclick="toggleAbs('dynghost')">abstract</a>
-              <a href="https://arxiv.org/abs/2605.10185">arXiv</a>
-            </div>
-            <p class="abs" id="dynghost">Ghost imaging reconstructs spatial information from a single-pixel bucket
-                detector by correlating structured illumination patterns with scalar intensity
-                measurements. While deep learning approaches have achieved promising results
-                on static scenes, two critical limitations remain unaddressed: existing
-                architectures fail to exploit temporal coherence across frames, leaving dynamic
-                ghost imaging largely unsolved, and they assume additive Gaussian noise models
-                that do not reflect the true Poissonian statistics of real single-photon
-                hardware. We present \textbf{DynGhost} (Dynamic Ghost Imaging Transformer), a
-                transformer architecture that addresses both limitations through alternating
-                spatial and temporal attention blocks. Our detector-aware training framework,
-                based on physically accurate hardware simulations (SNSPDs, SPADs, SiPMs) and
-                Anscombe variance-stabilizing normalization, resolves the distribution shift
-                that causes classical models to fail under realistic hardware constraints.
-                Experiments across multiple benchmarks demonstrate that DynGhost outperforms
-                both traditional reconstruction methods and existing deep learning
-                architectures, with particular gains in dynamic and photon-starved settings.</p>
-          </div>
-        </article>
 
         <article class="item">
           <div class="thumb">
@@ -705,6 +720,60 @@
               as few as 50 measurements, EnergyLens achieves 84.6% Top-1 configuration-selection accuracy, versus 60.9%
               for the closest analytical baseline. It matches ensemble ML accuracy with 10&times; fewer samples, and
               adapts to new platforms without modifying the template.</p>
+          </div>
+        </article>
+
+        <article class="item">
+          <div class="thumb">
+            <img loading="lazy" src="assets/images_paper/dynghost.png" alt="DynGhost dynamic ghost imaging transformer">
+          </div>
+          <div class="meta">
+            <p class="ptitle"><a href="https://arxiv.org/abs/2605.10185">DynGhost: Temporally-Modelled Transformer for Dynamic Ghost Imaging</a></p>
+            <p class="authors"><span class="me">Vittorio Palladino</span>, A. E. Cetin</p>
+            <p class="venue ok">Accepted (Oral Presentation): Multimedia Signal Processing (MMSP), 2026 &middot; arXiv:2605.10185</p>
+            <div class="links">
+              <a href="javascript:void(0)" onclick="toggleAbs('dynghost')">abstract</a>
+              <a href="https://arxiv.org/abs/2605.10185">arXiv</a>
+            </div>
+            <p class="abs" id="dynghost">Ghost imaging reconstructs spatial information from a single-pixel bucket
+                detector by correlating structured illumination patterns with scalar intensity
+                measurements. While deep learning approaches have achieved promising results
+                on static scenes, two critical limitations remain unaddressed: existing
+                architectures fail to exploit temporal coherence across frames, leaving dynamic
+                ghost imaging largely unsolved, and they assume additive Gaussian noise models
+                that do not reflect the true Poissonian statistics of real single-photon
+                hardware. We present \textbf{DynGhost} (Dynamic Ghost Imaging Transformer), a
+                transformer architecture that addresses both limitations through alternating
+                spatial and temporal attention blocks. Our detector-aware training framework,
+                based on physically accurate hardware simulations (SNSPDs, SPADs, SiPMs) and
+                Anscombe variance-stabilizing normalization, resolves the distribution shift
+                that causes classical models to fail under realistic hardware constraints.
+                Experiments across multiple benchmarks demonstrate that DynGhost outperforms
+                both traditional reconstruction methods and existing deep learning
+                architectures, with particular gains in dynamic and photon-starved settings.</p>
+          </div>
+        </article>
+
+        <article class="item">
+          <div class="thumb">
+            <img loading="lazy" src="assets/images_paper/aida.jpg" alt="AIDA autonomous vehicle of Politecnico di Milano">
+          </div>
+          <div class="meta">
+            <p class="ptitle"><a href="assets/papers_pdf/AIDA.pdf">Camera-Based 3D Object Detection as a LiDAR Backup for Autonomous Driving</a></p>
+            <p class="authors"><span class="me">Vittorio Palladino</span></p>
+            <p class="venue">Personal project &middot; AIDA, Politecnico di Milano</p>
+            <div class="links">
+              <a href="javascript:void(0)" onclick="toggleAbs('aida')">abstract</a>
+              <a href="assets/papers_pdf/AIDA.pdf">pdf</a>
+            </div>
+            <p class="abs" id="aida">We evaluate whether camera-only 3D object detection can serve as a reliable
+              backup or complement to LiDAR for autonomous vehicles. We study two state-of-the-art multi-camera
+              models, SparseBEV and StreamPETR, running pretrained inference and fine-tuning them on nuScenes and on
+              a custom dataset collected with the AIDA vehicle, including a pseudo-labeled training set and the
+              manually labeled AIDA-MDP-500 test set. StreamPETR achieves higher overall mAP and NDS, and
+              fine-tuning it on pseudo-labeled data significantly improves detection on AIDA-MDP-500, while
+              SparseBEV degrades when fine-tuned on the limited custom data. Our results show that camera-only models
+              are a useful complement to LiDAR, but a performance gap remains.</p>
           </div>
         </article>
 
@@ -748,6 +817,17 @@
   </div>
 
   <script>
+    (function () {
+      const slides = document.querySelectorAll('#carousel img');
+      let i = 0;
+      setInterval(() => {
+        slides[i].classList.remove('active');
+        i = (i + 1) % slides.length;
+        slides[i].classList.add('active');
+        document.getElementById('carousel-cap').textContent = slides[i].dataset.cap;
+      }, 4000);
+    })();
+
     var THEMES = ["dark", "light", "amber", "matrix", "synthwave"];
 
     function applyTheme(t) {
@@ -788,12 +868,13 @@
     }
 
     /* ===== lightbox ===== */
-    var lbFigs = [], lbIdx = 0, lbAlt = "";
+    var lbFigs = [], lbIdx = 0, lbAlt = "", lbCaps = null;
 
     function lbShow() {
       document.getElementById("lb-img").src = lbFigs[lbIdx];
-      document.getElementById("lb-img").alt = lbAlt;
-      document.getElementById("lb-cap").textContent = lbAlt;
+      var cap = lbCaps ? lbCaps[lbIdx] : lbAlt;
+      document.getElementById("lb-img").alt = cap;
+      document.getElementById("lb-cap").textContent = cap;
       document.getElementById("lb-count").textContent = (lbIdx + 1) + " / " + lbFigs.length;
       document.getElementById("lb-nav").classList.toggle("on", lbFigs.length > 1);
     }
@@ -806,6 +887,7 @@
     function openLightbox(thumb, img) {
       lbFigs = figsOf(thumb);
       lbAlt = img.alt;
+      lbCaps = null;
       var cur = img.getAttribute("src");
       lbIdx = Math.max(0, lbFigs.indexOf(cur));
       lbShow();
@@ -826,8 +908,17 @@
     document.addEventListener("click", function (e) {
       var t = e.target;
       var thumb = t.closest ? t.closest(".item .thumb") : null;
+      var car = t.closest ? t.closest("#carousel") : null;
       if (thumb && t.tagName === "IMG") {
         openLightbox(thumb, t);
+      } else if (car) {
+        var imgs = Array.prototype.slice.call(car.querySelectorAll("img"));
+        lbFigs = imgs.map(function (im) { return im.getAttribute("src"); });
+        lbCaps = imgs.map(function (im) { return im.dataset.cap; });
+        lbIdx = Math.max(0, imgs.indexOf(car.querySelector("img.active")));
+        lbShow();
+        document.getElementById("lightbox").classList.add("open");
+        document.body.style.overflow = "hidden";
       } else if (t.id === "lightbox") {
         closeLightbox();
       }
