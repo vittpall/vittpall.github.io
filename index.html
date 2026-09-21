@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vittorio Palladino</title>
+  <title>Vittorio Palladino — Robotics Researcher</title>
+  <meta name="description" content="Vittorio Palladino, robotics researcher working on safe motion planning and perception for autonomous aerial robots. Visiting researcher at HiPeRLab, UC Berkeley.">
   <meta name="author" content="Vittorio Palladino">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
@@ -39,47 +40,8 @@
       --shadow: rgba(0, 0, 0, .15);
     }
 
-    html[data-theme="amber"] {
-      --bg: #1a1206;
-      --term: #211705;
-      --bar: #2d1f08;
-      --text: #ffb642;
-      --muted: #9a7233;
-      --accent: #ffcf70;
-      --accent2: #ff9a1f;
-      --hot: #ff7043;
-      --ok: #3a9d4a;
-      --border: #3d2a0b;
-      --shadow: rgba(0, 0, 0, .6);
-    }
 
-    html[data-theme="matrix"] {
-      --bg: #000a04;
-      --term: #01140a;
-      --bar: #04240f;
-      --text: #46f28a;
-      --muted: #2a8a53;
-      --accent: #9cffccff;
-      --accent2: #27d17a;
-      --hot: #d7ff6b;
-      --ok: #1f8f4a;
-      --border: #0c3a1e;
-      --shadow: rgba(0, 0, 0, .7);
-    }
 
-    html[data-theme="synthwave"] {
-      --bg: #14032b;
-      --term: #1d0740;
-      --bar: #2a0b58;
-      --text: #e6d6ff;
-      --muted: #9b7fc4;
-      --accent: #ff4fd8;
-      --accent2: #5ce1e6;
-      --hot: #ffd166;
-      --ok: #2ea043;
-      --border: #3c1478;
-      --shadow: rgba(0, 0, 0, .55);
-    }
 
     * {
       box-sizing: border-box;
@@ -287,7 +249,7 @@
     .cap {
       font-size: .75rem;
       color: var(--muted);
-      margin-top: .4rem;
+      margin: .4rem 0 1rem;
     }
 
     /* ===== contact ===== */
@@ -577,8 +539,8 @@
       <p class="login">Last login: Sun Sep 20 09:14 on ttys001</p>
       <div class="banner">
         <div class="bline"><span class="bk">name</span><span class="name">Vittorio Palladino</span></div>
-        <div class="bline"><span class="bk">role</span>Visiting Research Student · <a href="https://hiperlab.berkeley.edu/">HiPeRLab, UC Berkeley</a></div>
-        <div class="bline"><span class="bk">focus</span>robotics and perception · optimization</div>
+        <div class="bline"><span class="bk">role</span>Robotics Researcher · Visiting Research Student, <a href="https://hiperlab.berkeley.edu/">HiPeRLab, UC Berkeley</a></div>
+        <div class="bline"><span class="bk">focus</span>motion planning · perception · autonomous UAVs</div>
         <div class="bline"><span class="bk">edu</span>MSc · <a href="https://www.uic.edu/">University of Illinois Chicago</a> &nbsp;|&nbsp; MSc · <a href="https://www.polimi.it/en">Politecnico di Milano</a></div>
       </div>
 
@@ -586,18 +548,24 @@
       <p class="cmd"><span class="prompt">vittorio@web<span class="pe">:~$</span></span> whoami</p>
       <div class="out">
         <div class="headshot">
-          <div class="carousel" id="carousel">
+          <!-- top carousel: add more <img> here to rotate -->
+          <div class="carousel">
+            <img class="active" data-cap="Occlusion-aware MPPI" src="assets/profile/OA-MPPI.gif" alt="Occlusion-aware MPPI demo">
+          </div>
+          <div class="cap">Occlusion-aware MPPI</div>
+
+          <!-- bottom carousel: add more <img> here to rotate -->
+          <div class="carousel">
             <img class="active" data-cap="UC Berkeley" src="assets/profile/Berkeley.jpg" alt="Vittorio at UC Berkeley">
             <img data-cap="Drover Labs" src="assets/profile/droverlabs.jpg" alt="Vittorio at Drover Labs">
-            <img data-cap="Occlusion-aware MPPI" src="assets/profile/OA-MPPI.gif" alt="Occlusion-aware MPPI demo">
           </div>
-          <div class="cap" id="carousel-cap">UC Berkeley</div>
+          <div class="cap">UC Berkeley</div>
         </div>
         <p>
-          Hi, I am Vittorio! I am a dual Master's student at the
+          Hi, I am Vittorio! I am a robotics researcher working on safe motion planning and perception
+          for autonomous aerial robots. I am a dual Master's student at the
           <a href="https://www.uic.edu/">University of Illinois Chicago</a> and
-          <a href="https://www.polimi.it/en">Politecnico di Milano</a>, working on machine learning
-          systems and optimization.
+          <a href="https://www.polimi.it/en">Politecnico di Milano</a>.
         </p>
         <p>
           In summer 2026 I joined <a href="https://www.berkeley.edu/">UC Berkeley</a> as a visiting research
@@ -606,7 +574,7 @@
           occlusion aware motion planning and LiDAR-based perception for autonomous UAV.
         </p>
         <p>
-          I am highly interested in safe motion planning, perception and optimization.
+          I am interested in safe motion planning under uncertainty, perception-aware control, optimization for robotics and AI planning.
         </p>
       </div>
 
@@ -665,7 +633,6 @@
           </div>
         </article>
 
-
         <article class="item">
           <div class="thumb">
             <img loading="lazy" src="assets/images_paper/FLAME.png" alt="FLAME mixed-precision quantization framework">
@@ -694,7 +661,6 @@
               trade-offs on real hardware.</p>
           </div>
         </article>
-
 
         <article class="item">
           <div class="thumb">
@@ -818,17 +784,21 @@
 
   <script>
     (function () {
-      const slides = document.querySelectorAll('#carousel img');
-      let i = 0;
-      setInterval(() => {
-        slides[i].classList.remove('active');
-        i = (i + 1) % slides.length;
-        slides[i].classList.add('active');
-        document.getElementById('carousel-cap').textContent = slides[i].dataset.cap;
-      }, 4000);
+      document.querySelectorAll('.carousel').forEach((car) => {
+        const slides = car.querySelectorAll('img');
+        const cap = car.nextElementSibling;
+        if (slides.length < 2) return;
+        let i = 0;
+        setInterval(() => {
+          slides[i].classList.remove('active');
+          i = (i + 1) % slides.length;
+          slides[i].classList.add('active');
+          cap.textContent = slides[i].dataset.cap;
+        }, 4000);
+      });
     })();
 
-    var THEMES = ["dark", "light", "amber", "matrix", "synthwave"];
+    var THEMES = ["dark", "light"];
 
     function applyTheme(t) {
       document.documentElement.setAttribute("data-theme", t);
@@ -908,7 +878,7 @@
     document.addEventListener("click", function (e) {
       var t = e.target;
       var thumb = t.closest ? t.closest(".item .thumb") : null;
-      var car = t.closest ? t.closest("#carousel") : null;
+      var car = t.closest ? t.closest(".carousel") : null;
       if (thumb && t.tagName === "IMG") {
         openLightbox(thumb, t);
       } else if (car) {
