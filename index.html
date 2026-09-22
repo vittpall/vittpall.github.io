@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vittorio Palladino — Robotics Researcher</title>
   <meta name="description" content="Vittorio Palladino, robotics researcher working on safe motion planning and perception for autonomous aerial robots. Visiting researcher at HiPeRLab, UC Berkeley.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' aria-hidden='true' fill='none' stroke='%2358d68d' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><line x1='12' y1='2.5' x2='12' y2='6'/><circle cx='12' cy='2.5' r='1'/><rect x='4' y='6' width='16' height='12' rx='3'/><circle cx='9' cy='12' r='1.3' fill='%2358d68d'/><circle cx='15' cy='12' r='1.3' fill='%2358d68d'/><line x1='9.5' y1='15.5' x2='14.5' y2='15.5'/><line x1='2' y1='11' x2='2' y2='14'/><line x1='22' y1='11' x2='22' y2='14'/><line x1='8' y1='18' x2='8' y2='21'/><line x1='16' y1='18' x2='16' y2='21'/></svg>">
   <meta name="author" content="Vittorio Palladino">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
@@ -203,6 +204,41 @@
     .name {
       color: var(--accent);
       font-weight: 700;
+    }
+
+    .logos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-top: .8rem;
+    }
+
+    .logos a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 52px;
+      padding: 4px 10px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: border-color .15s;
+    }
+
+    .logos a:hover {
+      border-color: var(--accent);
+    }
+
+    .logos img {
+      height: 100%;
+      width: auto;
+    }
+
+    .robot {
+      width: 1.1em;
+      height: 1.1em;
+      vertical-align: -.15em;
+      margin-left: .3em;
     }
 
     /* ===== whoami ===== */
@@ -538,10 +574,15 @@
       <!-- ===== login banner ===== -->
       <p class="login">Last login: Sun Sep 20 09:14 on ttys001</p>
       <div class="banner">
-        <div class="bline"><span class="bk">name</span><span class="name">Vittorio Palladino</span></div>
+        <div class="bline"><span class="bk">name</span><span class="name">Vittorio Palladino <svg class="robot" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2.5" x2="12" y2="6"/><circle cx="12" cy="2.5" r="1"/><rect x="4" y="6" width="16" height="12" rx="3"/><circle cx="9" cy="12" r="1.3" fill="currentColor"/><circle cx="15" cy="12" r="1.3" fill="currentColor"/><line x1="9.5" y1="15.5" x2="14.5" y2="15.5"/><line x1="2" y1="11" x2="2" y2="14"/><line x1="22" y1="11" x2="22" y2="14"/><line x1="8" y1="18" x2="8" y2="21"/><line x1="16" y1="18" x2="16" y2="21"/></svg></span></div>
         <div class="bline"><span class="bk">role</span>Robotics Researcher · Visiting Research Student, <a href="https://hiperlab.berkeley.edu/">HiPeRLab, UC Berkeley</a></div>
         <div class="bline"><span class="bk">focus</span>motion planning · perception · autonomous UAVs</div>
         <div class="bline"><span class="bk">edu</span>MSc · <a href="https://www.uic.edu/">University of Illinois Chicago</a> &nbsp;|&nbsp; MSc · <a href="https://www.polimi.it/en">Politecnico di Milano</a></div>
+        <div class="logos">
+          <a href="https://www.berkeley.edu/" title="UC Berkeley"><img src="assets/profile/logo_ucb.svg" alt="UC Berkeley logo"></a>
+          <a href="https://www.polimi.it/en" title="Politecnico di Milano"><img src="assets/profile/logo_polimi.jpeg" alt="Politecnico di Milano logo"></a>
+          <a href="https://www.uic.edu/" title="University of Illinois Chicago"><img src="assets/profile/logo_uic.PNG" alt="University of Illinois Chicago logo"></a>
+        </div>
       </div>
 
       <!-- ===== whoami ===== -->
